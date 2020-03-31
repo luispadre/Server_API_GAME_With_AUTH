@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 const dotEnv = require("dotenv")
 var path = require('path')
 
+const config = require('./config');
 
 dotEnv.config()
 const app = express()
@@ -22,8 +23,9 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use("/api",  require('./routes/games'));
 app.use("/rest/api/ui",  require('./routes/Ui'));
 app.use('/api/accounts', require('./routes/users'));
+var port = process.env.PORT || config.port;
 
-app.listen(process.env.PORT, function() {
-	console.log(`La magia ocurre en el puerto ${process.env.PORT}`);
+app.listen(port, function() {
+	console.log(`La magia ocurre en el puerto ${port}`);
   });
   
